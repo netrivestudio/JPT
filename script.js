@@ -41,6 +41,7 @@ function renderData() {
         <td>Rp ${formatRupiah(item.hargaUnit)}</td>
         <td><strong>Rp ${formatRupiah(total)}</strong></td>
         <td>${item.jenis}</td>
+        <td>${item.keterangan || "-"}</td>
         <td>
           <button onclick="hapusData(${index})">X</button>
         </td>
@@ -74,20 +75,18 @@ function tambahData() {
     return;
   }
 
-  const newData = {
+  data.push({
     tanggal,
     namaItem,
     jumlahUnit,
     hargaUnit,
     jenis,
     keterangan
-  };
+  });
 
-  data.push(newData);
   simpanData();
   renderData();
 
-  // Reset form
   document.getElementById("namaItem").value = "";
   document.getElementById("jumlahUnit").value = "";
   document.getElementById("hargaUnit").value = "";
@@ -133,18 +132,16 @@ function exportPDF() {
     item.jumlahUnit,
     "Rp " + formatRupiah(item.hargaUnit),
     "Rp " + formatRupiah(item.jumlahUnit * item.hargaUnit),
-    item.jenis
+    item.jenis,
+    item.keterangan || "-"
   ]);
 
   doc.autoTable({
-    head: [["Tanggal", "Item", "Unit", "Harga", "Total", "Jenis"]],
+    head: [["Tanggal", "Item", "Unit", "Harga", "Total", "Jenis", "Keterangan"]],
     body: rows,
     startY: 20
   });
 
-  // =============================
-  // POSISI RINGKASAN MANUAL
-  // =============================
   let posisiY = 20 + (rows.length * 8) + 20;
 
   doc.setFontSize(12);
@@ -156,3 +153,7 @@ function exportPDF() {
   doc.save("laporan-keuangan-jpt.pdf");
 }
 
+// =====================================
+// INIT
+// =====================================
+renderData();
