@@ -1,22 +1,22 @@
-// =============================
+// =====================================
 // DATA STORAGE
-// =============================
+// =====================================
 let data = JSON.parse(localStorage.getItem("jptData")) || [];
 
 function simpanData() {
   localStorage.setItem("jptData", JSON.stringify(data));
 }
 
-// =============================
+// =====================================
 // FORMAT RUPIAH
-// =============================
+// =====================================
 function formatRupiah(angka) {
   return angka.toLocaleString("id-ID");
 }
 
-// =============================
+// =====================================
 // RENDER TABLE + TOTAL
-// =============================
+// =====================================
 function renderData() {
   const tbody = document.querySelector("#dataTable tbody");
   tbody.innerHTML = "";
@@ -58,9 +58,9 @@ function renderData() {
     "Rp " + formatRupiah(totalMasuk - totalKeluar);
 }
 
-// =============================
+// =====================================
 // TAMBAH DATA
-// =============================
+// =====================================
 function tambahData() {
   const tanggal = document.getElementById("tanggal").value;
   const namaItem = document.getElementById("namaItem").value;
@@ -94,9 +94,9 @@ function tambahData() {
   document.getElementById("keterangan").value = "";
 }
 
-// =============================
+// =====================================
 // HAPUS DATA
-// =============================
+// =====================================
 function hapusData(index) {
   if (confirm("Yakin ingin menghapus data ini?")) {
     data.splice(index, 1);
@@ -105,26 +105,36 @@ function hapusData(index) {
   }
 }
 
-// =============================
-// EXPORT PDF
-// =============================
+// =====================================
+// EXPORT PDF + TOTAL RINGKASAN
+// =====================================
 function exportPDF() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
 
+  let totalMasuk = 0;
+  let totalKeluar = 0;
+
+  data.forEach(item => {
+    const total = item.jumlahUnit * item.hargaUnit;
+    if (item.jenis === "Pemasukan") {
+      totalMasuk += total;
+    } else {
+      totalKeluar += total;
+    }
+  });
+
   doc.setFontSize(14);
   doc.text("PT. JPT - Laporan Keuangan", 14, 15);
 
-  const rows = data.map(item => {
-    return [
-      item.tanggal,
-      item.namaItem,
-      item.jumlahUnit,
-      "Rp " + formatRupiah(item.hargaUnit),
-      "Rp " + formatRupiah(item.jumlahUnit * item.hargaUnit),
-      item.jenis
-    ];
-  });
+  const rows = data.map(item => [
+    item.tanggal,
+    item.namaItem,
+    item.jumlahUnit,
+    "Rp " + formatRupiah(item.hargaUnit),
+    "Rp " + formatRupiah(item.jumlahUnit * item.hargaUnit),
+    item.jenis
+  ]);
 
   doc.autoTable({
     head: [["Tanggal", "Item", "Unit", "Harga", "Total", "Jenis"]],
@@ -132,10 +142,17 @@ function exportPDF() {
     startY: 20
   });
 
+  const finalY = doc.lastAutoTable.finalY + 10;
+
+  doc.setFontSize(12);
+  doc.text("Total Pemasukan: Rp " + formatRupiah(totalMasuk), 14, finalY);
+  doc.text("Total Pengeluaran: Rp " + formatRupiah(totalKeluar), 14, finalY + 8);
+  doc.text("Saldo Akhir: Rp " + formatRupiah(totalMasuk - totalKeluar), 14, finalY + 16);
+
   doc.save("laporan-keuangan-jpt.pdf");
 }
 
-// =============================
+// =====================================
 // INIT
-// =============================
+// =====================================
 renderData();
