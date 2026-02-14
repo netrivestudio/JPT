@@ -1,0 +1,119 @@
+ 
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #052e16;
+  color: #ecfdf5;
+}
+
+/* HEADER */
+.app-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.logo-kop {
+  width: 90px;
+  margin-bottom: 10px;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.app-header p {
+  margin-top: 5px;
+  color: #a7f3d0;
+}
+
+/* CONTAINER */
+.container {
+  max-width: 1100px;
+  margin: auto;
+}
+
+/* CARD */
+.card {
+  background: #064e3b;
+  padding: 20px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  border: 1px solid #065f46;
+}
+
+/* FORM */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+input, select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #10b981;
+  background: #022c22;
+  color: #ecfdf5;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #22c55e;
+  box-shadow: 0 0 0 2px rgba(34,197,94,0.3);
+}
+
+/* BUTTON */
+button {
+  background: #22c55e;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #022c22;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+.btn-secondary {
+  background: #16a34a;
+  color: white;
+}
+
+/* TABLE */
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  border-bottom: 1px solid #065f46;
+  text-align: left;
+}
+
+th {
+  background: #022c22;
+}
+
+tr:nth-child(even) {
+  background: #033d2e;
+}
+
+/* TOTAL BOX */
+.total-box p {
+  margin: 6px 0;
+  font-size: 16px;
+}

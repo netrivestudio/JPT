@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PT. JPT - Sistem Keuangan</title>
+
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#064e3b">
+  <link rel="icon" href="assets/jpt192.png">
+
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.5.29/dist/jspdf.plugin.autotable.min.js"></script>
+</head>
+
+<body>
+
+<header class="app-header">
+  <img src="assets/jpt192.png" class="logo-kop">
+  <h1>PT. JPT (Juragan Pakan Ternak)</h1>
+  <p>Sistem Pembukuan Keuangan</p>
+</header>
+
+<main class="container">
+
+  <!-- FORM -->
+  <section class="card">
+    <div class="form-grid">
+      <input type="date" id="tanggal">
+      <input type="text" id="namaItem" placeholder="Nama Item / Unit">
+      <input type="number" id="jumlahUnit" placeholder="Jumlah Unit">
+      <input type="number" id="hargaUnit" placeholder="Harga per Unit">
+      <select id="jenis">
+        <option value="Pemasukan">Pemasukan</option>
+        <option value="Pengeluaran">Pengeluaran</option>
+      </select>
+      <input type="text" id="keterangan" placeholder="Keterangan">
+      <button onclick="tambahData()">Tambah</button>
+      <button class="btn-secondary" onclick="exportPDF()">Export PDF</button>
+    </div>
+  </section>
+
+  <!-- TABLE -->
+  <section class="card">
+    <div class="table-wrapper">
+      <table id="dataTable">
+        <thead>
+          <tr>
+            <th>Tanggal</th>
+            <th>Item</th>
+            <th>Unit</th>
+            <th>Harga</th>
+            <th>Total</th>
+            <th>Jenis</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- TOTAL -->
+  <section class="card total-box">
+    <p>Total Pemasukan: <span id="totalMasuk">0</span></p>
+    <p>Total Pengeluaran: <span id="totalKeluar">0</span></p>
+    <p><strong>Saldo Akhir: <span id="saldoAkhir">0</span></strong></p>
+  </section>
+
+</main>
+
+<script src="script.js"></script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js");
+}
+</script>
+
+</body>
+</html>
