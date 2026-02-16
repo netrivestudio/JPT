@@ -116,7 +116,7 @@ function exportPDF() {
 
   data.forEach(item => {
     const total = item.jumlahUnit * item.hargaUnit;
-    if (item.jenis === "Pemasukan") {
+    if (item.jenis === "Penjualan") {
       totalMasuk += total;
     } else {
       totalKeluar += total;
@@ -145,8 +145,8 @@ function exportPDF() {
   let posisiY = 20 + (rows.length * 8) + 20;
 
   doc.setFontSize(12);
-  doc.text("Total Pemasukan: Rp " + formatRupiah(totalMasuk), 14, posisiY);
-  doc.text("Total Pengeluaran: Rp " + formatRupiah(totalKeluar), 14, posisiY + 8);
+  doc.text("Total Penjualan: Rp " + formatRupiah(totalMasuk), 14, posisiY);
+  doc.text("Total Pembelian: Rp " + formatRupiah(totalKeluar), 14, posisiY + 8);
   doc.setFont(undefined, "bold");
   doc.text("Saldo Akhir: Rp " + formatRupiah(totalMasuk - totalKeluar), 14, posisiY + 16);
 
@@ -157,4 +157,5 @@ function exportPDF() {
 // INIT
 // =====================================
 renderData();
+
 
