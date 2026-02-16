@@ -32,10 +32,10 @@
       <input type="text" id="namaItem" placeholder="Nama Item / Unit">
       <input type="number" id="jumlahUnit" placeholder="Jumlah Unit">
       <input type="number" id="hargaUnit" placeholder="Harga per Unit">
-      <select id="jenis">
-        <option value="Pemasukan">Pemasukan</option>
-        <option value="Pengeluaran">Pengeluaran</option>
-      </select>
+     <select id="jenis">
+  <option value="Penjualan">Penjualan</option>
+  <option value="Pembelian">Pembelian</option>
+</select>
       <input type="text" id="keterangan" placeholder="Keterangan (contoh: Toko A)">
       <button onclick="tambahData()">Tambah</button>
       <button class="btn-secondary" onclick="exportPDF()">Export PDF</button>
@@ -65,8 +65,8 @@
 
   <!-- TOTAL -->
   <section class="card total-box">
-    <p>Total Pemasukan: <span id="totalMasuk">0</span></p>
-    <p>Total Pengeluaran: <span id="totalKeluar">0</span></p>
+    <p>Total Penjualan: <span id="totalMasuk">0</span></p>
+<p>Total Pembelian: <span id="totalKeluar">0</span></p>
     <p><strong>Saldo Akhir: <span id="saldoAkhir">0</span></strong></p>
   </section>
 
@@ -82,3 +82,4 @@ if ("serviceWorker" in navigator) {
 
 </body>
 </html>
+
