@@ -27,11 +27,11 @@ function renderData() {
   data.forEach((item, index) => {
     const total = item.jumlahUnit * item.hargaUnit;
 
-    if (item.jenis === "Pemasukan") {
-      totalMasuk += total;
-    } else {
-      totalKeluar += total;
-    }
+  if (item.jenis === "Penjualan") {
+  totalMasuk += total;
+} else {
+  totalKeluar += total;
+}
 
     tbody.innerHTML += `
       <tr>
@@ -157,3 +157,4 @@ function exportPDF() {
 // INIT
 // =====================================
 renderData();
+
